@@ -4,6 +4,7 @@ import com.example.demo.repositories.TaskRepository;
 import com.example.demo.classes.Task;
 import com.example.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -27,7 +28,7 @@ public class TaskServiceImp implements TaskService {
 
     @Override
     public List<Task> getAllTasksByKeyword(String keyword) {
-        return taskRepository.findAll()
+        return taskRepository.findAll(Sort.by(Sort.Direction.ASC,"id"))
                 .stream()
 //                .filter(task -> task.getTask().contains(keyword) || task.getProject().contains(keyword))
                 .filter(task -> task.getTask().contains(keyword))
